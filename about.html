@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — What Did Eggs Do Now? | Weekly Grocery Price Tracker</title>
+  <meta name="description" content="What Did Eggs Do Now? tracks national average grocery prices — eggs, milk, butter, bread, beef, chicken, bacon, coffee, orange juice, gas and diesel. Data sourced from FRED, BLS, and EIA." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥚</text></svg>" />
+  <link rel="canonical" href="https://whatdideggsdonow.com/about.html" />
+  <meta property="og:title" content="About — What Did Eggs Do Now?" />
+  <meta property="og:description" content="A free tracker of national average grocery prices. Sourced from FRED, BLS, and EIA data. Food prices update monthly; gas and diesel update weekly." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://whatdideggsdonow.com/about.html" />
+  <meta property="og:image" content="https://i.imgur.com/eyPAJuS.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MFGPQD2MM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4MFGPQD2MM');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Chewy&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --yolk: #F4C430;
+      --yolk-dark: #D4A820;
+      --yolk-light: #FDF3C0;
+      --bg: #FFFEF5;
+      --card-bg: #FFFFFF;
+      --dark: #1A1A1A;
+      --mid: #555555;
+      --light: #999999;
+      --border: #EBEBEB;
+      --radius: 16px;
+      --shadow: 0 2px 16px rgba(0,0,0,0.07);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; }
+
+    /* HEADER */
+    .site-header { background: var(--dark); color: white; padding: 0 24px; }
+    .header-inner {
+      max-width: 1100px; margin: 0 auto; padding: 24px 0;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .logo-link { text-decoration: none; }
+    .logo { font-family: 'Chewy', sans-serif; font-size: clamp(20px, 3vw, 32px); font-weight: 800; color: var(--yolk); }
+    .back-link {
+      color: #aaa; font-size: 14px; text-decoration: none; display: flex; align-items: center; gap: 6px;
+    }
+    .back-link:hover { color: var(--yolk); }
+
+    /* MAIN */
+    .main { max-width: 780px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    .page-title {
+      font-family: 'Chewy', sans-serif; font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800; color: var(--dark); margin-bottom: 8px; line-height: 1.15;
+    }
+    .page-subtitle { font-size: 16px; color: var(--light); margin-bottom: 48px; }
+
+    h2 {
+      font-family: 'Chewy', sans-serif; font-size: 22px; font-weight: 800;
+      margin-top: 48px; margin-bottom: 14px; color: var(--dark);
+    }
+    h2:first-of-type { margin-top: 0; }
+    p { font-size: 15px; color: var(--mid); line-height: 1.8; margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+    a { color: var(--dark); font-weight: 600; }
+    a:hover { color: var(--yolk-dark); }
+
+    .highlight {
+      background: var(--yolk-light); border-left: 4px solid var(--yolk);
+      border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 32px 0;
+    }
+    .highlight p { margin-bottom: 0; font-size: 15px; color: var(--dark); font-weight: 500; }
+
+    .sources-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px; margin: 24px 0;
+    }
+    .source-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px; box-shadow: var(--shadow);
+    }
+    .source-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .source-card p { font-size: 13px; color: var(--light); margin-bottom: 8px; }
+    .source-card a { font-size: 13px; font-weight: 600; }
+
+    .items-list {
+      display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0;
+    }
+    .item-pill {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 100px;
+      padding: 6px 14px; font-size: 14px; font-weight: 600; color: var(--dark);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-block {
+      background: var(--dark); border-radius: var(--radius);
+      padding: 36px; text-align: center; margin-top: 56px;
+    }
+    .cta-block h2 { color: var(--yolk); margin-top: 0; }
+    .cta-block p { color: #aaa; margin-bottom: 24px; }
+    .cta-btn {
+      display: inline-block; background: var(--yolk); color: var(--dark);
+      border-radius: 100px; padding: 14px 32px; font-weight: 800; font-size: 15px;
+      text-decoration: none; transition: background 0.15s; font-family: 'Chewy', sans-serif;
+    }
+    .cta-btn:hover { background: var(--yolk-dark); color: var(--dark); }
+
+    /* FOOTER */
+    .site-footer {
+      background: var(--dark); color: #666; padding: 32px 24px;
+      text-align: center; font-size: 13px; line-height: 1.7;
+    }
+    .footer-logo { font-family: 'Chewy', sans-serif; font-size: 18px; font-weight: 800; color: var(--yolk); margin-bottom: 8px; }
+    .footer-nav { display: flex; gap: 20px; justify-content: center; margin: 12px 0; }
+    .footer-nav a { color: #777; font-size: 13px; text-decoration: none; }
+    .footer-nav a:hover { color: var(--yolk); }
+    .footer-copy { margin-top: 8px; font-size: 11px; color: #444; }
+
+    @media (max-width: 600px) {
+      .main { padding: 36px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo-link"><div class="logo">🥚 What Did Eggs Do Now?</div></a>
+    <a href="/" class="back-link">← Back to this week's prices</a>
+  </div>
+</header>
+
+<main class="main">
+
+  <h1 class="page-title">About This Site</h1>
+  <p class="page-subtitle">A brief explanation of what we do, why we do it, and why egg prices specifically have pushed so many of us to the edge.</p>
+
+  <h2>What is What Did Eggs Do Now?</h2>
+  <p>What Did Eggs Do Now? is a free weekly grocery price tracker. Every Sunday we publish the national average retail prices for eleven essential items — eggs, milk, butter, bread, ground beef, chicken breast, bacon, coffee, orange juice, regular gas, and diesel — and present them with the kind of snarky commentary they deserve.</p>
+  <p>The site exists because grocery prices have become genuinely chaotic, the news cycle moves fast, and most people just want a clear answer to a simple question: what did things cost this week, and is that up or down from last week? We answer that question every Sunday and try to make it slightly less painful in the process.</p>
+
+  <div class="highlight">
+    <p>This is not financial advice. We are not economists. We are people who gasped at a grocery receipt one too many times and decided to make it everyone's problem.</p>
+  </div>
+
+  <h2>What groceries do you track?</h2>
+  <p>We track ten items that represent the core of most Americans' weekly shopping. These are the staples — things people buy every week without much thought, right up until the moment they cost too much to buy without much thought.</p>
+  <div class="items-list">
+    <span class="item-pill">🥚 Eggs (1 dozen, Grade A Large)</span>
+    <span class="item-pill">🥛 Milk (1 gallon, whole)</span>
+    <span class="item-pill">🧈 Butter (1 lb, salted)</span>
+    <span class="item-pill">🍞 Bread (1 loaf, white sandwich)</span>
+    <span class="item-pill">🥩 Ground Beef (1 lb, 80/20)</span>
+    <span class="item-pill">🍗 Chicken Breast (1 lb, boneless skinless)</span>
+    <span class="item-pill">🥓 Bacon (1 lb, sliced)</span>
+    <span class="item-pill">☕ Coffee (1 lb, ground roast)</span>
+    <span class="item-pill">🍊 Orange Juice (64 oz, not-from-concentrate)</span>
+    <span class="item-pill">⛽ Regular Gas (1 gallon)</span>
+    <span class="item-pill">🚛 Diesel (1 gallon)</span>
+  </div>
+
+  <h2>Where does the data come from?</h2>
+  <p>All prices are national average retail figures retrieved from FRED (Federal Reserve Economic Data), which aggregates official U.S. government datasets — the same sources used by economists, journalists, and people who argue about inflation on the internet.</p>
+  <div class="sources-grid">
+    <div class="source-card">
+      <h3>FRED — Federal Reserve Economic Data</h3>
+      <p>Our data pipeline. Aggregates BLS and EIA data into one clean API.</p>
+      <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">fred.stlouisfed.org</a>
+    </div>
+    <div class="source-card">
+      <h3>Bureau of Labor Statistics</h3>
+      <p>CPI average price data for food items. Updates monthly.</p>
+      <a href="https://www.bls.gov/cpi/" target="_blank" rel="noopener">bls.gov/cpi</a>
+    </div>
+    <div class="source-card">
+      <h3>U.S. Energy Information Administration</h3>
+      <p>National average retail gas and diesel prices. Updates weekly.</p>
+      <a href="https://www.eia.gov" target="_blank" rel="noopener">eia.gov</a>
+    </div>
+  </div>
+  <p>These are national averages. Your local store may be charging more, less, or a frankly insulting amount. Regional variation is real. We track the national trend — not what your specific Kroger is doing, though we have opinions about that too.</p>
+
+  <h2>How often is it updated?</h2>
+  <p>Every Sunday. Government data releases happen on a weekly cycle and we publish our update the same day. If you want to stop being surprised at checkout, check back every Sunday morning.</p>
+
+  <h2>Why are egg prices so high?</h2>
+  <p>The short answer: avian flu. The longer answer: avian flu, feed costs, seasonal demand, supply chain fragility, and the general instability of a food system that turns out to be less robust than anyone advertised.</p>
+  <p>Since 2022, repeated outbreaks of Highly Pathogenic Avian Influenza (HPAI) have resulted in the culling of tens of millions of laying hens across the U.S. When the flock shrinks, supply drops, and prices spike — sometimes dramatically. The flock recovers slowly. Prices do not always follow. This cycle has repeated multiple times and shows no sign of becoming less dramatic anytime soon.</p>
+  <p>Egg prices are also uniquely visible. Everyone buys eggs. Everyone notices when they cost $7. That's why eggs became the symbol of the broader grocery price chaos even as milk, butter, beef, bacon, and coffee quietly did their own damage in the background.</p>
+
+  <h2>Why track gas and diesel too?</h2>
+  <p>Because everything you buy arrived on a truck, and that truck runs on diesel. Fuel prices are not a grocery item, but they are a grocery price driver. When diesel spikes, transportation costs rise, and those costs get passed along the supply chain until they land in your cart. Tracking fuel alongside food prices gives a more complete picture of what's actually driving the numbers.</p>
+
+  <h2>Who runs this site?</h2>
+  <p>This site is run independently by a person who got tired of being surprised at checkout. It is a public service, funded by a small amount of advertising and merchandise sales, and motivated entirely by the shared experience of staring at a receipt and feeling personally wronged by a carton of eggs.</p>
+  <p>Questions, corrections, or tips: <a href="mailto:hello@whatdideggsdonow.com">hello@whatdideggsdonow.com</a></p>
+
+  <div class="cta-block">
+    <h2>See this week's prices</h2>
+    <p>Free. No signup required. Food prices update monthly. Gas and diesel update weekly. Just the numbers and the snark.</p>
+    <a href="/" class="cta-btn">See This Week's Prices →</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-logo">🥚 What Did Eggs Do Now?</div>
+  <p>A weekly public service for people who gasp at their grocery receipts.</p>
+  <nav class="footer-nav">
+    <a href="/">Home</a>
+    <a href="about.html">About</a>
+    <a href="mailto:hello@whatdideggsdonow.com">Contact</a>
+  </nav>
+  <p class="footer-data">Data: <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener" style="color:#777;">FRED</a> · <a href="https://www.bls.gov/cpi/" target="_blank" rel="noopener" style="color:#777;">BLS CPI</a> · <a href="https://www.eia.gov" target="_blank" rel="noopener" style="color:#777;">EIA</a></p>
+  <p class="footer-copy">© 2026 What Did Eggs Do Now. All prices are national averages and approximate. Not financial advice. We're just sad about groceries.</p>
+</footer>
+
+</body>
+</html>

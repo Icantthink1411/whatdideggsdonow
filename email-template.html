@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>What Did Eggs Do Now? — Week of [WEEK_DATE]</title>
+  <style>
+    /* Reset */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+    /* Responsive */
+    @media only screen and (max-width: 620px) {
+      .email-wrapper { width: 100% !important; }
+      .email-body { padding: 24px 16px !important; }
+      .sponsor-block { padding: 16px !important; }
+      .price-item { padding: 14px 16px !important; }
+      .header-title { font-size: 26px !important; }
+      .cta-btn { padding: 14px 28px !important; font-size: 16px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#F0EEE4;font-family:Arial,Helvetica,sans-serif;">
+
+<!-- PREHEADER (hidden preview text in inbox) -->
+<div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#F0EEE4;">
+  This week: eggs, milk, butter, beef, gas and more — see what went up, down, and sideways. 🥚
+  &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+</div>
+
+<!-- OUTER WRAPPER -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F0EEE4">
+<tr><td align="center" style="padding:24px 16px;">
+
+  <!-- EMAIL CONTAINER -->
+  <table class="email-wrapper" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- HEADER                                  -->
+    <!-- ═══════════════════════════════════════ -->
+    <tr>
+      <td bgcolor="#F4C430" style="background-color:#F4C430;border-radius:12px 12px 0 0;padding:32px 40px 28px;text-align:center;">
+        <div style="font-size:40px;line-height:1;margin-bottom:10px;">🥚</div>
+        <div class="header-title" style="font-family:Georgia,serif;font-size:30px;font-weight:bold;color:#1A1A1A;letter-spacing:-0.5px;line-height:1.2;">What Did Eggs Do Now?</div>
+        <div style="font-size:14px;color:#6B5800;margin-top:8px;font-style:italic;">Your weekly guide to grocery price chaos</div>
+        <div style="margin-top:14px;display:inline-block;background-color:#1A1A1A;color:#F4C430;font-size:12px;font-weight:bold;letter-spacing:1px;padding:6px 14px;border-radius:20px;text-transform:uppercase;">Week of [WEEK_DATE]</div>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- INTRO                                   -->
+    <!-- ═══════════════════════════════════════ -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:28px 40px 20px;">
+        <p style="margin:0;font-size:16px;line-height:1.65;color:#333333;">
+          <!-- EDIT: Write a 1-2 sentence intro about this week's overall vibe -->
+          [INTRO_TEXT — e.g. "Eggs are still behaving. Ground beef is not. Welcome to another Sunday of witnessing prices that feel personally targeted."]
+        </p>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SPONSOR SLOT A — TOP                    -->
+    <!-- Remove this block if no sponsor         -->
+    <!-- ═══════════════════════════════════════ -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 24px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="sponsor-block" style="background-color:#FFFBE6;border:1.5px solid #F4C430;border-radius:10px;padding:20px 24px;">
+              <div style="font-size:10px;font-weight:bold;letter-spacing:1.5px;color:#AA8800;text-transform:uppercase;margin-bottom:8px;">Sponsored</div>
+              <!-- WHEN YOU HAVE A SPONSOR: replace everything below with their content -->
+              <p style="margin:0;font-size:14px;color:#888888;line-height:1.5;font-style:italic;">
+                This newsletter reaches thousands of people who actively track grocery and fuel prices every week. Interested in reaching them? <a href="mailto:hello@whatdideggsdonow.com" style="color:#D4A820;text-decoration:none;font-weight:bold;">Email us about sponsorship →</a>
+              </p>
+              <!-- END SPONSOR CONTENT -->
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SECTION LABEL                           -->
+    <!-- ═══════════════════════════════════════ -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 12px;">
+        <div style="font-size:11px;font-weight:bold;letter-spacing:1.5px;color:#999999;text-transform:uppercase;">This Week's Prices — National Averages</div>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- PRICE ITEMS 1–5                         -->
+    <!-- TREND COLOR: UP=#E53935 DOWN=#2E7D32 FLAT=#888888 -->
+    <!-- TREND BG:    UP=#FFF0F0 DOWN=#F0FFF1 FLAT=#F5F5F5 -->
+    <!-- ═══════════════════════════════════════ -->
+
+    <!-- ITEM: EGGS -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="price-item" style="background-color:#FFFFFF;border-radius:10px;border-left:4px solid #2E7D32;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;">
+                    <span style="font-size:22px;">🥚</span>
+                    <span style="font-size:17px;font-weight:bold;color:#1A1A1A;margin-left:8px;">Eggs</span>
+                    <span style="font-size:12px;color:#999999;margin-left:6px;">1 dozen</span>
+                  </td>
+                  <td align="right" style="vertical-align:top;white-space:nowrap;">
+                    <span style="font-size:20px;font-weight:bold;color:#1A1A1A;">$[EGGS_PRICE]</span>
+                    <span style="display:inline-block;margin-left:8px;background-color:#F0FFF1;color:#2E7D32;font-size:12px;font-weight:bold;padding:3px 8px;border-radius:12px;">↓ [EGGS_PCT]%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:8px;font-size:13px;color:#555555;line-height:1.5;font-style:italic;">[EGGS_SNARK]</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ITEM: MILK -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="price-item" style="background-color:#FFFFFF;border-radius:10px;border-left:4px solid #E53935;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;">
+                    <span style="font-size:22px;">🥛</span>
+                    <span style="font-size:17px;font-weight:bold;color:#1A1A1A;margin-left:8px;">Milk</span>
+                    <span style="font-size:12px;color:#999999;margin-left:6px;">1 gallon</span>
+                  </td>
+                  <td align="right" style="vertical-align:top;white-space:nowrap;">
+                    <span style="font-size:20px;font-weight:bold;color:#1A1A1A;">$[MILK_PRICE]</span>
+                    <span style="display:inline-block;margin-left:8px;background-color:#FFF0F0;color:#E53935;font-size:12px;font-weight:bold;padding:3px 8px;border-radius:12px;">↑ [MILK_PCT]%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:8px;font-size:13px;color:#555555;line-height:1.5;font-style:italic;">[MILK_SNARK]</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ITEM: BUTTER -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="price-item" style="background-color:#FFFFFF;border-radius:10px;border-left:4px solid #2E7D32;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;">
+                    <span style="font-size:22px;">🧈</span>
+                    <span style="font-size:17px;font-weight:bold;color:#1A1A1A;margin-left:8px;">Butter</span>
+                    <span style="font-size:12px;color:#999999;margin-left:6px;">1 lb</span>
+                  </td>
+                  <td align="right" style="vertical-align:top;white-space:nowrap;">
+                    <span style="font-size:20px;font-weight:bold;color:#1A1A1A;">$[BUTTER_PRICE]</span>
+                    <span style="display:inline-block;margin-left:8px;background-color:#F0FFF1;color:#2E7D32;font-size:12px;font-weight:bold;padding:3px 8px;border-radius:12px;">↓ [BUTTER_PCT]%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:8px;font-size:13px;color:#555555;line-height:1.5;font-style:italic;">[BUTTER_SNARK]</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ITEM: BREAD -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="price-item" style="background-color:#FFFFFF;border-radius:10px;border-left:4px solid #2E7D32;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;">
+                    <span style="font-size:22px;">🍞</span>
+                    <span style="font-size:17px;font-weight:bold;color:#1A1A1A;margin-left:8px;">Bread</span>
+                    <span style="font-size:12px;color:#999999;margin-left:6px;">1 loaf</span>
+                  </td>
+                  <td align="right" style="vertical-align:top;white-space:nowrap;">
+                    <span style="font-size:20px;font-weight:bold;color:#1A1A1A;">$[BREAD_PRICE]</span>
+                    <span style="display:inline-block;margin-left:8px;background-color:#F0FFF1;color:#2E7D32;font-size:12px;font-weight:bold;padding:3px 8px;border-radius:12px;">↓ [BREAD_PCT]%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:8px;font-size:13px;color:#555555;line-height:1.5;font-style:italic;">[BREAD_SNARK]</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ITEM: GROUND BEEF -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="price-item" style="background-color:#FFFFFF;border-radius:10px;border-left:4px solid #E53935;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;">
+                    <span style="font-size:22px;">🥩</span>
+                    <span style="font-size:17px;font-weight:bold;color:#1A1A1A;margin-left:8px;">Ground Beef</span>
+                    <span style="font-size:12px;color:#999999;margin-left:6px;">1 lb</span>
+                  </td>
+                  <td align="right" style="vertical-align:top;white-space:nowrap;">
+                    <span style="font-size:20px;font-weight:bold;color:#1A1A1A;">$[BEEF_PRICE]</span>
+                    <span style="display:inline-block;margin-left:8px;background-color:#FFF0F0;color:#E53935;font-size:12px;font-weight:bold;padding:3px 8px;border-radius:12px;">↑ [BEEF_PCT]%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:8px;font-size:13px;color:#555555;line-height:1.5;font-style:italic;">[BEEF_SNARK]</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SPONSOR SLOT B — MIDDLE                 -->
+    <!-- Remove this block if no sponsor         -->
+    <!-- ═══════════════════════════════════════ -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:8px 40px 20px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="sponsor-block" style="background-color:#FFFBE6;border:1.5px solid #F4C430;border-radius:10px;padding:20px 24px;">
+              <div style="font-size:10px;font-weight:bold;letter-spacing:1.5px;color:#AA8800;text-transform:uppercase;margin-bottom:8px;">Sponsored</div>
+              <!-- WHEN YOU HAVE A SPONSOR: replace everything below with their content -->
+              <p style="margin:0;font-size:14px;color:#888888;line-height:1.5;font-style:italic;">
+                Want to reach a highly engaged audience of budget-conscious shoppers? <a href="mailto:hello@whatdideggsdonow.com" style="color:#D4A820;text-decoration:none;font-weight:bold;">Get in touch →</a>
+              </p>
+              <!-- END SPONSOR CONTENT -->
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ITEM: CHICKEN BREAST -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="price-item" style="background-color:#FFFFFF;border-radius:10px;border-left:4px solid #2E7D32;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;">
+                    <span style="font-size:22px;">🍗</span>
+                    <span style="font-size:17px;font-weight:bold;color:#1A1A1A;margin-left:8px;">Chicken Breast</span>
+                    <span style="font-size:12px;color:#999999;margin-left:6px;">1 lb</span>
+                  </td>
+                  <td align="right" style="vertical-align:top;white-space:nowrap;">
+                    <span style="font-size:20px;font-weight:bold;color:#1A1A1A;">$[CHICKEN_PRICE]</span>
+                    <span style="display:inline-block;margin-left:8px;background-color:#F0FFF1;color:#2E7D32;font-size:12px;font-weight:bold;padding:3px 8px;border-radius:12px;">↓ [CHICKEN_PCT]%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:8px;font-size:13px;color:#555555;line-height:1.5;font-style:italic;">[CHICKEN_SNARK]</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ITEM: ORANGE JUICE -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="price-item" style="background-color:#FFFFFF;border-radius:10px;border-left:4px solid #E53935;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;">
+                    <span style="font-size:22px;">🍊</span>
+                    <span style="font-size:17px;font-weight:bold;color:#1A1A1A;margin-left:8px;">Orange Juice</span>
+                    <span style="font-size:12px;color:#999999;margin-left:6px;">64 oz</span>
+                  </td>
+                  <td align="right" style="vertical-align:top;white-space:nowrap;">
+                    <span style="font-size:20px;font-weight:bold;color:#1A1A1A;">$[OJ_PRICE]</span>
+                    <span style="display:inline-block;margin-left:8px;background-color:#FFF0F0;color:#E53935;font-size:12px;font-weight:bold;padding:3px 8px;border-radius:12px;">↑ [OJ_PCT]%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:8px;font-size:13px;color:#555555;line-height:1.5;font-style:italic;">[OJ_SNARK]</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ITEM: REGULAR GAS -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="price-item" style="background-color:#FFFFFF;border-radius:10px;border-left:4px solid #2E7D32;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;">
+                    <span style="font-size:22px;">⛽</span>
+                    <span style="font-size:17px;font-weight:bold;color:#1A1A1A;margin-left:8px;">Regular Gas</span>
+                    <span style="font-size:12px;color:#999999;margin-left:6px;">1 gallon</span>
+                  </td>
+                  <td align="right" style="vertical-align:top;white-space:nowrap;">
+                    <span style="font-size:20px;font-weight:bold;color:#1A1A1A;">$[GAS_PRICE]</span>
+                    <span style="display:inline-block;margin-left:8px;background-color:#F0FFF1;color:#2E7D32;font-size:12px;font-weight:bold;padding:3px 8px;border-radius:12px;">↓ [GAS_PCT]%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:8px;font-size:13px;color:#555555;line-height:1.5;font-style:italic;">[GAS_SNARK]</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ITEM: DIESEL -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:0 40px 20px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td class="price-item" style="background-color:#FFFFFF;border-radius:10px;border-left:4px solid #2E7D32;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="vertical-align:top;">
+                    <span style="font-size:22px;">🚛</span>
+                    <span style="font-size:17px;font-weight:bold;color:#1A1A1A;margin-left:8px;">Diesel</span>
+                    <span style="font-size:12px;color:#999999;margin-left:6px;">1 gallon</span>
+                  </td>
+                  <td align="right" style="vertical-align:top;white-space:nowrap;">
+                    <span style="font-size:20px;font-weight:bold;color:#1A1A1A;">$[DIESEL_PRICE]</span>
+                    <span style="display:inline-block;margin-left:8px;background-color:#F0FFF1;color:#2E7D32;font-size:12px;font-weight:bold;padding:3px 8px;border-radius:12px;">↓ [DIESEL_PCT]%</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:8px;font-size:13px;color:#555555;line-height:1.5;font-style:italic;">[DIESEL_SNARK]</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CTA BUTTON                              -->
+    <!-- ═══════════════════════════════════════ -->
+    <tr>
+      <td bgcolor="#FFFEF5" style="background-color:#FFFEF5;padding:4px 40px 32px;text-align:center;">
+        <a href="https://whatdideggsdonow.com" class="cta-btn" style="display:inline-block;background-color:#F4C430;color:#1A1A1A;font-size:17px;font-weight:bold;text-decoration:none;padding:16px 36px;border-radius:50px;font-family:Arial,Helvetica,sans-serif;">View Full Report + Charts →</a>
+        <p style="margin:16px 0 0;font-size:12px;color:#AAAAAA;">See 6-month price trend charts for every item at whatdideggsdonow.com</p>
+      </td>
+    </tr>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- FOOTER                                  -->
+    <!-- ═══════════════════════════════════════ -->
+    <tr>
+      <td bgcolor="#1A1A1A" style="background-color:#1A1A1A;border-radius:0 0 12px 12px;padding:28px 40px;text-align:center;">
+        <div style="font-size:18px;margin-bottom:6px;">🥚</div>
+        <div style="font-family:Georgia,serif;font-size:16px;font-weight:bold;color:#F4C430;margin-bottom:12px;">What Did Eggs Do Now?</div>
+        <div style="margin-bottom:16px;">
+          <a href="https://whatdideggsdonow.com" style="color:#AAAAAA;text-decoration:none;font-size:13px;margin:0 10px;">Website</a>
+          <span style="color:#444444;">|</span>
+          <a href="mailto:hello@whatdideggsdonow.com" style="color:#AAAAAA;text-decoration:none;font-size:13px;margin:0 10px;">Contact</a>
+          <span style="color:#444444;">|</span>
+          <a href="https://shop.whatdideggsdonow.com" style="color:#AAAAAA;text-decoration:none;font-size:13px;margin:0 10px;">Merch</a>
+        </div>
+        <p style="margin:0 0 10px;font-size:11px;color:#555555;line-height:1.6;">
+          You're receiving this because you signed up at whatdideggsdonow.com.<br />
+          Prices are national averages sourced from FRED, BLS, and EIA data.
+        </p>
+        <p style="margin:0;font-size:11px;">
+          <a href="[UNSUBSCRIBE_LINK]" style="color:#555555;text-decoration:underline;">Unsubscribe</a>
+        </p>
+      </td>
+    </tr>
+
+  </table>
+  <!-- END EMAIL CONTAINER -->
+
+</td></tr>
+</table>
+<!-- END OUTER WRAPPER -->
+
+</body>
+</html>

@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grocery Prices This Week — Eggs, Milk, Beef, Gas & More | What Did Eggs Do Now?</title>
+  <meta name="description" content="This week's national average grocery prices: eggs, milk, butter, bread, ground beef, chicken, bacon, coffee, orange juice, gas and diesel. Sourced from FRED, BLS, and EIA data. See what went up, what went down, and why." />
+  <!-- Favicon: egg emoji -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥚</text></svg>" />
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="What Did Eggs Do Now?" />
+  <meta property="og:description" content="Your weekly guide to grocery price chaos. Eggs, milk, butter, and more tracked with snarky commentary." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://whatdideggsdonow.com" />
+  <meta property="og:image" content="https://i.imgur.com/eyPAJuS.jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Did Eggs Do Now?" />
+  <meta name="twitter:description" content="Your weekly guide to grocery price chaos." />
+  <meta name="twitter:image" content="https://i.imgur.com/eyPAJuS.jpeg" />
+  <link rel="canonical" href="https://whatdideggsdonow.com" />
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "What Did Eggs Do Now?",
+    "url": "https://whatdideggsdonow.com",
+    "description": "Free weekly tracker of national average grocery and fuel prices — eggs, milk, butter, bread, ground beef, chicken, bacon, coffee, orange juice, gas and diesel. Sourced from FRED, BLS, and EIA data.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "What Did Eggs Do Now?",
+      "url": "https://whatdideggsdonow.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is this site?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "What Did Eggs Do Now? is a free weekly grocery price tracker covering staple items like eggs, milk, butter, bread, beef, bacon, coffee, and more. Prices are national averages sourced from FRED, BLS, and EIA data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate are the grocery prices?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Prices reflect national average retail costs sourced from FRED, drawing on Bureau of Labor Statistics CPI data for food items and EIA data for gas and diesel. Your local store will vary — sometimes a lot. We track trends, not specific store prices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often are prices updated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every Sunday. Government data releases happen weekly and we publish our update the same day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why are egg prices so volatile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Egg prices fluctuate due to avian flu outbreaks, feed costs, seasonal demand, and supply chain disruptions. When a major outbreak hits, millions of hens are culled, supply drops, and prices spike. This has happened multiple times since 2022 and shows no sign of becoming less dramatic."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the grocery price data come from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Prices are sourced from the Federal Reserve Economic Data (FRED), which aggregates Bureau of Labor Statistics CPI average price data for food items and U.S. Energy Information Administration data for gas and diesel. These are the same government datasets used by economists and major news organizations."
+        }
+      }
+    ]
+  }
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MFGPQD2MM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4MFGPQD2MM');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Chewy&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --yolk: #F4C430;
+      --yolk-dark: #D4A820;
+      --yolk-light: #FDF3C0;
+      --bg: #FFFEF5;
+      --card-bg: #FFFFFF;
+      --dark: #1A1A1A;
+      --mid: #555555;
+      --light: #999999;
+      --border: #EBEBEB;
+      --up: #E53935;
+      --up-bg: #FFF0F0;
+      --down: #2E7D32;
+      --down-bg: #F0FFF1;
+      --flat: #666;
+      --flat-bg: #F5F5F5;
+      --radius: 16px;
+      --shadow: 0 2px 16px rgba(0,0,0,0.07);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: #F5F0E8; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header { background: var(--dark); color: white; padding: 0; overflow: visible; }
+    .header-ad-bar { padding: 8px 24px; display: flex; justify-content: center; background: #F5F0E8; border-bottom: 1px dashed #C8BCA8; }
+    .header-ad-bar:empty { display: none; }
+
+    /* ── Receipt strip ── */
+    .receipt-header {
+      background: #F5F0E8;
+      border-top: 2px dashed #C8BCA8; /* perforations at top of the roll */
+      padding: 24px 24px 30px;
+      text-align: center;
+      position: relative;
+      overflow: visible;
+    }
+    /* Zigzag tear — cream teeth pointing down into dark header */
+    .receipt-header::after {
+      content: '';
+      position: absolute;
+      bottom: -16px; left: 0; right: 0; height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='16'%3E%3Cpolygon points='0,0 20,0 10,16' fill='%23F5F0E8'/%3E%3C/svg%3E");
+      background-size: 20px 16px;
+      background-repeat: repeat-x;
+      z-index: 2;
+    }
+    .receipt-header-store {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; flex-wrap: wrap;
+    }
+    .receipt-header-egg { font-size: clamp(32px, 5vw, 52px); line-height: 1; }
+    .receipt-header-title {
+      font-family: 'Chewy', sans-serif;
+      font-size: clamp(28px, 5.5vw, 58px);
+      color: var(--dark); line-height: 1;
+    }
+    .receipt-header-tagline {
+      font-family: 'Courier New', monospace;
+      font-size: clamp(9px, 1.3vw, 12px);
+      color: #3A2E22; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-top: 18px;
+    }
+    .receipt-header-divider {
+      border: none; border-top: 1px dashed #C8BCA8;
+      margin: 10px auto; width: min(440px, 80%);
+    }
+    .receipt-header-barcode {
+      font-family: 'Courier New', monospace;
+      font-size: 13px; color: #B0A090;
+      letter-spacing: 1px; line-height: 0.85;
+      margin-top: 4px;
+    }
+
+    /* ── Meta bar (dark) — date + share ── */
+    .header-meta { padding: 0 24px 20px; }
+    .header-meta-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding-top: 24px; /* clears the zigzag teeth */
+      display: flex; align-items: center;
+      justify-content: flex-end; gap: 12px; flex-wrap: wrap;
+    }
+    .update-badge {
+      background: #2a2a2a; border-radius: 100px;
+      padding: 8px 16px; font-size: 13px; color: #888;
+    }
+    .update-badge span { color: var(--yolk); font-weight: 600; }
+
+    /* ===== SHARE BAR ===== */
+    .share-bar { display: flex; gap: 8px; align-items: center; }
+    .share-bar-label { font-size: 12px; color: #666; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 100px; font-size: 12px;
+      font-weight: 600; cursor: pointer; border: none;
+      text-decoration: none; transition: opacity 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .share-btn:hover { opacity: 0.85; }
+    .share-btn-x { background: #000; color: white; }
+    .share-btn-fb { background: #1877F2; color: white; }
+    .share-btn-copy { background: #2a2a2a; color: #aaa; }
+    .share-btn-copy.copied { background: var(--down-bg); color: var(--down); }
+
+    /* ===== MOOD BAR ===== */
+    .mood-bar { background: var(--yolk); padding: 14px 24px; }
+    .mood-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .mood-label { font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dark); }
+    .mood-meter { display: flex; gap: 6px; align-items: center; }
+    .mood-pip { width: 28px; height: 10px; border-radius: 100px; background: rgba(0,0,0,0.15); transition: background 0.3s; }
+    .mood-pip.active { background: var(--dark); }
+    .mood-text { font-size: 14px; font-weight: 600; color: var(--dark); margin-left: 8px; }
+    .villain-badge {
+      margin-left: auto; background: var(--dark); color: var(--yolk);
+      border-radius: 100px; padding: 6px 14px; font-size: 13px; font-weight: 700;
+    }
+
+    /* ===== MAIN ===== */
+    .main { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--light); margin-bottom: 20px;
+    }
+
+    /* ===== INTRO ===== */
+    .site-intro {
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .intro-text {
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.75;
+      margin-bottom: 14px;
+      max-width: 780px;
+    }
+    .intro-readmore {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      text-decoration: none;
+      border-bottom: 2px solid var(--yolk);
+      padding-bottom: 2px;
+      transition: color 0.15s;
+    }
+    .intro-readmore:hover { color: var(--yolk-dark); }
+
+    /* ===== PRICE GRID ===== */
+    .price-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px; margin-bottom: 48px;
+    }
+    .price-card {
+      background: var(--card-bg); border-radius: var(--radius);
+      padding: 24px; box-shadow: var(--shadow); border: 1px solid var(--border);
+      transition: transform 0.15s, box-shadow 0.15s; position: relative; overflow: hidden;
+    }
+    .price-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    .price-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: var(--radius) var(--radius) 0 0; }
+    .price-card.trend-up::before { background: var(--up); }
+    .price-card.trend-down::before { background: var(--down); }
+    .price-card.trend-flat::before { background: var(--yolk); }
+
+    /* ===== VILLAIN CARD ===== */
+    .price-card.is-villain {
+      overflow: visible; /* flames escape; top bar self-clips via ::before border-radius */
+      border-color: var(--up);
+      animation: villain-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes villain-pulse {
+      0%, 100% { box-shadow: var(--shadow); }
+      50% { box-shadow: 0 0 28px rgba(229, 57, 53, 0.4); }
+    }
+    .price-card.is-villain::before { background: var(--up); }
+
+    /* Devil peek — hidden by opacity until hover/reveal */
+    .villain-peek {
+      position: absolute; bottom: 10px; right: 16px;
+      font-size: 48px; line-height: 1; pointer-events: none; z-index: 10;
+      filter: drop-shadow(0 -3px 6px rgba(0,0,0,0.25));
+      transform: translateY(80px); opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+    }
+    .villain-crown {
+      position: absolute; bottom: 52px; right: 8px;
+      font-size: 18px; line-height: 1; pointer-events: none; z-index: 11;
+      transform: translateY(80px); opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s, opacity 0.2s ease 0.05s;
+    }
+    .price-card.is-villain:hover .villain-peek,
+    .price-card.is-villain.is-revealed .villain-peek { transform: translateY(0); opacity: 1; }
+    .price-card.is-villain:hover .villain-crown,
+    .price-card.is-villain.is-revealed .villain-crown { transform: translateY(0); opacity: 1; }
+
+    /* ===== FLAMES ===== */
+    .villain-flame {
+      position: absolute; pointer-events: none; z-index: 5; line-height: 1;
+      transform-origin: bottom center;
+      /* translate is separate from transform — allows scroll parallax without breaking flicker animation */
+      translate: 0 var(--py, 0px);
+    }
+    @keyframes flicker-a {
+      0%,100% { transform: scaleY(1)   scaleX(1)   rotate(-3deg); opacity: 0.9; }
+      33%      { transform: scaleY(1.3) scaleX(0.85) rotate(2deg);  opacity: 1;   }
+      66%      { transform: scaleY(0.8) scaleX(1.1)  rotate(-1deg); opacity: 0.8; }
+    }
+    @keyframes flicker-b {
+      0%,100% { transform: scaleY(0.9) rotate(2deg);  opacity: 0.85; }
+      40%      { transform: scaleY(1.2) rotate(-3deg); opacity: 1;    }
+      70%      { transform: scaleY(0.8) rotate(1deg);  opacity: 0.9;  }
+    }
+    @keyframes flicker-c {
+      0%,100% { transform: scaleY(1.1) rotate(1deg);  opacity: 1;    }
+      25%      { transform: scaleY(0.8) rotate(-2deg); opacity: 0.75; }
+      75%      { transform: scaleY(1.4) rotate(2deg);  opacity: 0.95; }
+    }
+    /* Individual flame positions — bottom row + sides */
+    .f-bl  { font-size: 30px; bottom: -10px; left:  -8px;              animation: flicker-a 1.10s ease-in-out infinite; }
+    .f-bcl { font-size: 26px; bottom: -14px; left:   18%;              animation: flicker-b 0.95s ease-in-out infinite 0.20s; }
+    .f-bc  { font-size: 40px; bottom: -20px; left: calc(50% - 20px);   animation: flicker-c 1.30s ease-in-out infinite 0.10s; }
+    .f-bcr { font-size: 26px; bottom: -14px; right:  18%;              animation: flicker-a 1.00s ease-in-out infinite 0.30s; }
+    .f-br  { font-size: 30px; bottom: -10px; right:  -8px;             animation: flicker-b 1.20s ease-in-out infinite 0.15s; }
+    .f-l   { font-size: 20px; bottom:  35%;  left:  -10px;             animation: flicker-c 1.05s ease-in-out infinite 0.25s; }
+    .f-r   { font-size: 20px; bottom:  35%;  right: -10px;             animation: flicker-a 1.15s ease-in-out infinite 0.05s; }
+    .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .card-item { display: flex; align-items: center; gap: 10px; }
+    .card-emoji { font-size: 28px; }
+    .card-name { font-weight: 700; font-size: 17px; }
+    .card-unit { font-size: 12px; color: var(--light); font-weight: 400; margin-top: 1px; }
+    .change-badge {
+      border-radius: 100px; padding: 5px 12px; font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; gap: 4px; white-space: nowrap;
+    }
+    .change-badge.up { background: var(--up-bg); color: var(--up); }
+    .change-badge.down { background: var(--down-bg); color: var(--down); }
+    .change-badge.flat { background: var(--flat-bg); color: var(--flat); }
+    .price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+    .current-price { font-size: 36px; font-weight: 900; font-family: 'Chewy', sans-serif; line-height: 1.1; }
+    .prev-price { font-size: 14px; color: var(--light); text-decoration: line-through; }
+    .year-ago { font-size: 12px; color: var(--light); margin-bottom: 12px; }
+    .year-ago strong { color: var(--mid); }
+    .snark {
+      font-size: 13.5px; color: var(--mid); line-height: 1.55; font-style: italic;
+      border-left: 3px solid var(--yolk); padding-left: 12px; margin-top: 12px; margin-bottom: 16px;
+    }
+    /* ===== BASKET CARD (receipt) ===== */
+    .basket-card {
+      background: #F5F0E8; /* warm thermal paper */
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 28px 32px 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.07);
+      border: 1px solid #DDD5C4;
+      margin-bottom: 52px;
+      position: relative; overflow: visible;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    /* Zigzag torn receipt edge — teeth match the receipt paper color */
+    .basket-card::after {
+      content: '';
+      position: absolute; bottom: -16px; left: 0; right: 0; height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='16'%3E%3Cpolygon points='0,0 20,0 10,16' fill='%23F5F0E8'/%3E%3C/svg%3E");
+      background-size: 20px 16px;
+      background-repeat: repeat-x;
+    }
+    .basket-receipt-footer {
+      flex: 0 0 100%;
+      border-top: 1px dashed #C8BCA8;
+      padding-top: 12px; margin-top: 4px;
+      font-size: 10px; color: #A89880; letter-spacing: 0.1em;
+      text-transform: uppercase; text-align: center;
+      font-family: 'Courier New', monospace;
+    }
+    .basket-left { display: flex; flex-direction: column; gap: 4px; }
+    .basket-label {
+      font-size: 11px; font-weight: 700; color: #8A7A66;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      font-family: 'Courier New', monospace;
+    }
+    .basket-total { font-family: 'Chewy', sans-serif; font-size: clamp(36px, 5vw, 52px); color: var(--dark); line-height: 1; }
+    .basket-sub { font-size: 13px; color: #8A7A66; margin-top: 4px; font-family: 'Courier New', monospace; }
+    .basket-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .basket-change { font-size: 18px; font-weight: 800; border-radius: 100px; padding: 8px 20px; }
+    .basket-change.up   { background: rgba(229,57,53,0.12);  color: #C62828; }
+    .basket-change.down { background: rgba(46,125,50,0.12);  color: #2E7D32; }
+    .basket-change.flat { background: rgba(180,160,100,0.2); color: #7A6A40; }
+    .basket-note { font-size: 12px; color: #8A7A66; text-align: right; font-family: 'Courier New', monospace; }
+
+    /* ===== SPOTLIGHT ===== */
+    .spotlight {
+      background: var(--card-bg); border-radius: var(--radius); padding: 24px 28px;
+      box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .spotlight-icon { font-size: 40px; line-height: 1; flex-shrink: 0; }
+    .spotlight-body { flex: 1; min-width: 200px; }
+    .spotlight-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--light); margin-bottom: 4px; }
+    .spotlight-headline { font-family: 'Chewy', sans-serif; font-size: 20px; color: var(--dark); margin-bottom: 4px; }
+    .spotlight-detail { font-size: 13px; color: var(--mid); line-height: 1.6; }
+    .spotlight.is-up { border-left: 4px solid var(--up); }
+    .spotlight.is-down { border-left: 4px solid var(--down); }
+
+    /* ===== CARD BADGES ===== */
+    .badge-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .card-badge {
+      font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 100px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .card-badge.high { background: rgba(229,57,53,0.1); color: var(--up); }
+    .card-badge.budget { background: rgba(46,125,50,0.1); color: var(--down); }
+
+    /* ===== LOCAL COMPARE ===== */
+    .compare-toggle {
+      display: inline-flex; align-items: center; gap: 5px; margin-top: 8px;
+      font-size: 11px; font-weight: 600; color: var(--light); cursor: pointer;
+      background: none; border: none; padding: 0; font-family: 'Inter', sans-serif;
+      transition: color 0.15s;
+    }
+    .compare-toggle:hover { color: var(--dark); }
+    .compare-section { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+    .compare-section.open { display: block; }
+    .compare-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .compare-input {
+      flex: 1; padding: 7px 10px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 13px; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark);
+      outline: none;
+    }
+    .compare-input:focus { border-color: var(--yolk); }
+    .compare-btn {
+      padding: 7px 14px; background: var(--dark); color: white; border: none;
+      border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer;
+      font-family: 'Inter', sans-serif; white-space: nowrap;
+    }
+    .compare-result { font-size: 12px; color: var(--mid); line-height: 1.6; min-height: 18px; }
+    .compare-result.better { color: var(--down); font-weight: 600; }
+    .compare-result.worse { color: var(--up); font-weight: 600; }
+
+    .card-share { display: flex; gap: 6px; margin-top: 4px; border-top: 1px solid var(--border); padding-top: 12px; }
+    .card-share-btn {
+      display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px;
+      border-radius: 100px; font-size: 11px; font-weight: 600; cursor: pointer;
+      border: 1px solid var(--border); background: var(--bg); color: var(--mid);
+      text-decoration: none; font-family: 'Inter', sans-serif; transition: all 0.15s;
+    }
+    .card-share-btn:hover { background: var(--dark); color: white; border-color: var(--dark); }
+
+    /* ===== CHART ===== */
+    .chart-section {
+      background: var(--card-bg); border-radius: var(--radius); padding: 32px;
+      box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 40px;
+    }
+    .chart-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 12px; }
+    .chart-title { font-size: 18px; font-weight: 700; }
+    .chart-subtitle { font-size: 13px; color: var(--light); margin-bottom: 16px; }
+    .chart-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chart-tab {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 100px;
+      padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
+      color: var(--mid); transition: all 0.15s; font-family: 'Inter', sans-serif;
+    }
+    .chart-tab.active { background: var(--dark); color: white; border-color: var(--dark); }
+    .chart-wrap { position: relative; height: 280px; }
+
+    /* ===== MERCH ===== */
+    .merch-section {
+      background: var(--card-bg); border-radius: var(--radius); padding: 32px;
+      box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 40px;
+    }
+    .merch-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 12px; }
+    .merch-title { font-size: 18px; font-weight: 700; }
+    .merch-subtitle { font-size: 13px; color: var(--light); margin-bottom: 24px; }
+    .merch-cta-block { background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%); border-radius: 12px; overflow: hidden; }
+    .merch-cta-inner { padding: 48px 40px; text-align: center; }
+    .merch-cta-icons { font-size: 36px; letter-spacing: 4px; margin-bottom: 20px; }
+    .merch-cta-headline { font-family: 'Chewy', sans-serif; font-size: clamp(20px, 3vw, 28px); font-weight: 800; color: var(--yolk); margin-bottom: 12px; }
+    .merch-cta-body { font-size: 15px; color: #aaa; max-width: 480px; margin: 0 auto 28px; line-height: 1.6; }
+    .merch-shop-btn {
+      display: inline-block; background: var(--yolk); color: var(--dark);
+      border-radius: 100px; padding: 14px 32px; font-weight: 800; font-size: 15px;
+      text-decoration: none; transition: background 0.15s, transform 0.15s; font-family: 'Chewy', sans-serif;
+    }
+    .merch-shop-btn:hover { background: var(--yolk-dark); transform: scale(1.03); }
+    .merch-cta-note { margin-top: 16px; font-size: 12px; color: #555; }
+
+    /* ===== EXPLAINER ===== */
+    .explainer {
+      background: var(--yolk-light); border: 1px solid var(--yolk);
+      border-radius: var(--radius); padding: 28px; margin-bottom: 40px;
+    }
+    .explainer h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .explainer p { font-size: 14px; color: var(--mid); line-height: 1.65; margin-bottom: 8px; }
+    .explainer p:last-child { margin-bottom: 0; }
+    .explainer a { color: var(--dark); font-weight: 600; }
+
+    /* ===== FAQ ===== */
+    .faq-section { margin-bottom: 40px; }
+    .faq-title { font-family: 'Chewy', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 24px; }
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .faq-item {
+      background: var(--card-bg); border-radius: var(--radius);
+      padding: 24px; box-shadow: var(--shadow); border: 1px solid var(--border);
+    }
+    .faq-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--dark); }
+    .faq-item p { font-size: 14px; color: var(--mid); line-height: 1.65; }
+    .faq-item a { color: var(--dark); font-weight: 600; }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: var(--dark); color: #666;
+      padding: 32px 24px; text-align: center; font-size: 13px; line-height: 1.7;
+    }
+    .site-footer a { color: #888; }
+    .footer-nav { display: flex; gap: 20px; justify-content: center; margin: 12px 0; }
+    .footer-nav a { color: #777; font-size: 13px; }
+    .footer-nav a:hover { color: var(--yolk); }
+    .footer-data { margin-top: 8px; }
+    .footer-copy { margin-top: 8px; font-size: 11px; color: #444; }
+    .footer-logo { font-family: 'Chewy', sans-serif; font-size: 20px; font-weight: 800; color: var(--yolk); margin-bottom: 8px; }
+
+    @media (max-width: 600px) {
+      .price-grid { grid-template-columns: 1fr; }
+      .villain-badge { display: none; }
+      .chart-section { padding: 20px; }
+      .merch-section { padding: 20px; }
+      .receipt-header { padding: 20px 16px 28px; }
+      .receipt-header-tagline { letter-spacing: 0.08em; }
+      .receipt-header-barcode { font-size: 10px; letter-spacing: 0; }
+      .header-meta { padding: 0 16px 16px; }
+      .header-meta-inner { justify-content: center; padding-top: 22px; gap: 8px; }
+      .update-badge { white-space: normal; font-size: 12px; }
+      .share-bar { flex-wrap: wrap; gap: 6px; justify-content: center; }
+      .share-bar-label { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-ad-bar">
+    <!-- ADSENSE LEADERBOARD 728x90 — paste your ad unit code here after approval -->
+  </div>
+
+  <!-- Receipt strip -->
+  <div class="receipt-header">
+    <div class="receipt-header-store">
+      <span class="receipt-header-egg">🥚</span>
+      <h1 class="receipt-header-title">What Did Eggs Do Now?</h1>
+    </div>
+    <div class="receipt-header-tagline">YOUR WEEKLY GROCERY RECEIPT &nbsp;·&nbsp; NATIONAL AVERAGES</div>
+    <hr class="receipt-header-divider" />
+    <div class="receipt-header-barcode">|||  ||  ||||  |  ||  |||  ||||  |  |||  ||  ||||  |  |||  ||  ||||  |  ||  |||</div>
+  </div>
+
+  <!-- Dark meta bar -->
+  <div class="header-meta">
+    <div class="header-meta-inner">
+      <div class="update-badge">Last updated: <span id="lastUpdated"></span></div>
+      <div class="share-bar">
+        <span class="share-bar-label">Share:</span>
+        <a id="shareX" href="#" target="_blank" rel="noopener" class="share-btn share-btn-x">𝕏 Post</a>
+        <a id="shareFB" href="#" target="_blank" rel="noopener" class="share-btn share-btn-fb">f Share</a>
+        <button class="share-btn share-btn-copy" onclick="copyLink(this)">🔗 Copy link</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MOOD BAR ===== -->
+<div class="mood-bar">
+  <div class="mood-inner">
+    <span class="mood-label">Price Panic Level</span>
+    <div class="mood-meter" id="moodMeter"></div>
+    <span class="mood-text" id="moodText"></span>
+    <div class="villain-badge" id="villainBadge"></div>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+  <!-- INTRO -->
+  <div class="site-intro">
+    <p class="intro-text">Every week, grocery prices do something. Usually something bad. Sometimes something insulting. Occasionally something that makes a reasonable person consider raising backyard chickens.</p>
+    <p class="intro-text">This site tracks the national average retail price of eggs, milk, butter, bread, ground beef, chicken, bacon, coffee, orange juice, gas, and diesel — sourced from FRED, BLS, and EIA data. Food prices update monthly. Gas and diesel update weekly. No guessing. No vibes. Just the numbers, a trend arrow, and our completely justified reaction to both.</p>
+    <a href="about.html" class="intro-readmore">Read more about how this works →</a>
+  </div>
+
+  <!-- BASKET CARD -->
+  <div class="basket-card" id="basketCard" style="display:none;">
+    <div class="basket-left">
+      <div class="basket-label">Full Basket Total · All 11 items</div>
+      <div class="basket-total" id="basketTotal">—</div>
+      <div class="basket-sub" id="basketSub"></div>
+    </div>
+    <div class="basket-right">
+      <div class="basket-change" id="basketChange"></div>
+      <div class="basket-note" id="basketNote"></div>
+    </div>
+    <div class="basket-receipt-footer">WHATDIDEGGSDONOW.COM &nbsp;·&nbsp; NATIONAL WEEKLY RECEIPT &nbsp;·&nbsp; NOT FINANCIAL ADVICE &nbsp;·&nbsp; WE'RE JUST SAD ABOUT GROCERIES</div>
+  </div>
+
+  <!-- SPOTLIGHT -->
+  <div class="spotlight" id="spotlight" style="display:none;"></div>
+
+  <p class="section-label">This Week's Prices — National averages · Updated weekly</p>
+
+  <div class="price-grid" id="priceGrid"></div>
+
+  <p id="pricesSummary" style="font-size:13px;color:#999;margin:8px 0 40px;line-height:1.6;">National average retail prices sourced from FRED, BLS, and EIA. Food prices update monthly; gas and diesel update weekly.</p>
+
+  <!-- ADSENSE INLINE 970x250 — paste your ad unit code here after approval -->
+
+  <!-- CHART -->
+  <div class="chart-section">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title">Price Over Time</div>
+        <div class="chart-subtitle">6-month trend — because watching prices go up in slow motion is a hobby now</div>
+      </div>
+      <div class="chart-tabs" id="chartTabs"></div>
+    </div>
+    <div class="chart-wrap"><canvas id="priceChart"></canvas></div>
+  </div>
+
+  <!-- MERCH -->
+  <div class="merch-section">
+    <div class="merch-header">
+      <div>
+        <div class="merch-title">🛒 Merch for the Financially Wounded</div>
+        <div class="merch-subtitle">Wear your grocery grief with pride.</div>
+      </div>
+    </div>
+    <div class="merch-cta-block">
+      <div class="merch-cta-inner">
+        <img src="Egg_Mascot.png" alt="What Did Eggs Do Now mascot" style="width:180px;height:180px;object-fit:contain;margin-bottom:12px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));" />
+        <h3 class="merch-cta-headline">Turn your grocery rage into a personality.</h3>
+        <p class="merch-cta-body">Tees, mugs, hats, and more — all designed for people who check egg prices more often than their horoscope.</p>
+        <a href="https://shop.whatdideggsdonow.com" target="_blank" rel="noopener" class="merch-shop-btn">Shop the Collection →</a>
+        <p class="merch-cta-note">Ships directly. Print-on-demand. No inventory was harmed in the making of this website.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPLAINER -->
+  <div class="explainer">
+    <h2>Where does this data come from?</h2>
+    <p>Prices are sourced from <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED (Federal Reserve Economic Data)</a>, which aggregates <a href="https://www.bls.gov/cpi/" target="_blank" rel="noopener">Bureau of Labor Statistics CPI average price data</a> for food items and <a href="https://www.eia.gov" target="_blank" rel="noopener">EIA data</a> for gas and diesel — the same boring government spreadsheets that economists argue about on the internet. Food prices update monthly. Gas and diesel update weekly.</p>
+    <p>We report national average retail prices. Your local store may be charging more, less, or a frankly insulting amount. We do not make the prices. We just witness them and make snarky remarks.</p>
+  </div>
+
+  <!-- FAQ / ABOUT -->
+  <div class="faq-section" id="about">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>What is this site?</h3>
+        <p>What Did Eggs Do Now? is a free weekly grocery price tracker covering staple items like eggs, milk, butter, bread, beef, bacon, coffee, and more. Prices are national averages sourced from FRED, BLS, and EIA data.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Who runs it?</h3>
+        <p>This site is run independently by a person who got tired of being surprised at the grocery store checkout. Consider it a public service. You're welcome.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How accurate are the prices?</h3>
+        <p>Prices reflect national average retail costs sourced from FRED, drawing on BLS CPI data for food and EIA data for fuel. Your local store will vary — sometimes a lot. We track trends, not specific store prices.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How often is it updated?</h3>
+        <p>Every Sunday. Government data releases happen weekly and we publish our update the same day.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Why are egg prices so volatile?</h3>
+        <p>Egg prices fluctuate due to avian flu outbreaks, feed costs, seasonal demand, and supply chain disruptions. When a major outbreak hits, millions of hens are culled, supply drops, and prices spike. This has happened multiple times since 2022 and shows no sign of becoming less dramatic.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I submit a tip or correction?</h3>
+        <p>Yes — email us at <a href="mailto:hello@whatdideggsdonow.com">hello@whatdideggsdonow.com</a>. If you notice a significant discrepancy between our numbers and what you're seeing locally, we want to know.</p>
+      </div>
+    </div>
+  </div>
+
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <!-- ADSENSE FOOTER 728x90 — paste your ad unit code here after approval -->
+  <div class="footer-logo">🥚 What Did Eggs Do Now?</div>
+  <p>A weekly public service for people who gasp at their grocery receipts.</p>
+  <nav class="footer-nav">
+    <a href="about.html">About</a>
+    <a href="mailto:hello@whatdideggsdonow.com">Contact</a>
+    <a href="#" onclick="document.getElementById('privacyModal').style.display='flex';return false;">Privacy Policy</a>
+  </nav>
+  <p class="footer-data">Data: <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED</a> · <a href="https://www.bls.gov/cpi/" target="_blank" rel="noopener">BLS CPI</a> · <a href="https://www.eia.gov" target="_blank" rel="noopener">EIA</a></p>
+  <p class="footer-copy">© 2026 What Did Eggs Do Now. All prices are national averages and approximate. Not financial advice. We're just sad about groceries.</p>
+</footer>
+
+<!-- ===== PRIVACY POLICY MODAL ===== -->
+<div id="privacyModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#fff;border-radius:16px;max-width:640px;width:100%;max-height:80vh;overflow-y:auto;padding:36px;position:relative;">
+    <button onclick="document.getElementById('privacyModal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999;">✕</button>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:20px;">Privacy Policy</h2>
+    <p style="font-size:13px;color:#999;margin-bottom:20px;">Last updated: May 2026</p>
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:8px;">What we collect</h3>
+    <p style="font-size:14px;color:#555;line-height:1.65;margin-bottom:16px;">This site does not collect any personal information. We do not run a newsletter or collect email addresses.</p>
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:8px;">Cookies and advertising</h3>
+    <p style="font-size:14px;color:#555;line-height:1.65;margin-bottom:16px;">This site uses Google AdSense to display advertisements. Google AdSense may use cookies to serve ads based on your prior visits to this website or other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener" style="color:#1a1a1a;font-weight:600;">Google Ad Settings</a>.</p>
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:8px;">Third-party links</h3>
+    <p style="font-size:14px;color:#555;line-height:1.65;margin-bottom:16px;">This site links to external sources including FRED, BLS.gov, EIA.gov, and our merchandise store. We are not responsible for the privacy practices of those sites.</p>
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:8px;">Contact</h3>
+    <p style="font-size:14px;color:#555;line-height:1.65;">For any privacy-related questions, email us at <a href="mailto:hello@whatdideggsdonow.com" style="color:#1a1a1a;font-weight:600;">hello@whatdideggsdonow.com</a>.</p>
+  </div>
+</div>
+
+<script>
+// ================================================================
+// CONFIGURATION — Edit these values each week
+// ================================================================
+const SITE_URL = "https://whatdideggsdonow.com";
+const SHOP_URL = "https://shop.whatdideggsdonow.com";
+
+// ================================================================
+// FALLBACK DATA — shown if Google Sheets fetch fails
+// ================================================================
+const FALLBACK_WEEK = "July 27, 2026";
+const FALLBACK_ITEMS = [
+  {
+    id: "eggs", name: "Eggs", unit: "1 dozen, Grade A Large", emoji: "🥚",
+    current: 2.14, previous: 2.19, yearAgo: 3.77,
+    history: [2.58, 2.5, 2.35, 2.25, 2.19, 2.14],
+    snark: "Price dropped. We don't know why and frankly we're afraid to ask."
+  },
+  {
+    id: "milk", name: "Milk", unit: "1 gallon, whole", emoji: "🥛",
+    current: 4.32, previous: 4.22, yearAgo: 4.03,
+    history: [4.1, 4.03, 4.07, 4.14, 4.22, 4.32],
+    snark: "The cows are not sorry. The cows have never been sorry. The cows will never be sorry."
+  },
+  {
+    id: "butter", name: "Butter", unit: "1 lb, salted", emoji: "🧈",
+    current: 3.82, previous: 3.93, yearAgo: 4.87,
+    history: [4.38, 4.31, 4.26, 4.22, 3.93, 3.82],
+    snark: "Down this week. Someone in the dairy supply chain did something right. We'd like to thank them personally."
+  },
+  {
+    id: "bread", name: "Bread", unit: "1 loaf, white sandwich", emoji: "🍞",
+    current: 2.27, previous: 2.29, yearAgo: 2.33,
+    history: [2.3, 2.31, 2.26, 2.34, 2.29, 2.27],
+    snark: "Cheaper this week. Make a sandwich. Make two. Make a sandwich tower and call it dinner."
+  },
+  {
+    id: "beef", name: "Ground Beef", unit: "1 lb, 80/20", emoji: "🥩",
+    current: 6.83, previous: 6.75, yearAgo: 6.12,
+    history: [6.75, 6.74, 6.7, 6.9, 6.75, 6.83],
+    snark: "Costs more. The cow is doing this deliberately and we have no way to prove it but we know."
+  },
+  {
+    id: "chicken", name: "Chicken Breast", unit: "1 lb, boneless skinless", emoji: "🍗",
+    current: 4.18, previous: 4.17, yearAgo: 4.24,
+    history: [4.17, 4.14, 4.17, 4.17, 4.17, 4.18],
+    snark: "Holding. Chicken is not making things worse. At this particular moment in history, that is heroic."
+  },
+  {
+    id: "bacon", name: "Bacon", unit: "1 lb, sliced", emoji: "🥓",
+    current: 6.56, previous: 6.71, yearAgo: 7.1,
+    history: [6.98, 6.9, 6.8, 6.83, 6.71, 6.56],
+    snark: "Down this week. The breakfast situation is improving. Don't get used to it but do enjoy it."
+  },
+  {
+    id: "coffee", name: "Coffee", unit: "1 lb, ground roast", emoji: "☕",
+    current: 9.46, previous: 9.51, yearAgo: 8.13,
+    history: [9.37, 9.46, 9.61, 9.72, 9.51, 9.46],
+    snark: "Dropped slightly. The coffee supply chain did something right for once and we're almost moved."
+  },
+  {
+    id: "oj", name: "Orange Juice", unit: "16 oz, frozen concentrate", emoji: "🍊",
+    current: 4.87, previous: 4.97, yearAgo: 4.49,
+    history: [4.87, 4.86, 4.89, 4.9, 4.97, 4.87],
+    snark: "Went down. Someone had a good harvest and made a good decision and we are grateful beyond words."
+  },
+  {
+    id: "gas", name: "Regular Gas", unit: "1 gallon", emoji: "⛽",
+    current: 4.0, previous: 3.85, yearAgo: 3.12,
+    history: [4.05, 3.91, 3.83, 3.78, 3.85, 4.0],
+    snark: "Up again. Fill up on a Tuesday if you can. It won't save much but at this point we take every inch."
+  },
+  {
+    id: "diesel", name: "Diesel", unit: "1 gallon", emoji: "🚛",
+    current: 5.13, previous: 4.8, yearAgo: 3.81,
+    history: [5.06, 4.83, 4.67, 4.58, 4.8, 5.13],
+    snark: "Higher. Diesel doesn't make headlines but diesel makes everything. And right now diesel costs more."
+  },
+];
+
+// ================================================================
+// HELPERS
+// ================================================================
+function pct(a, b) { return (a - b) / b * 100; }
+function trend(a, b) { const d = a - b; return Math.abs(d) < 0.005 ? "flat" : d > 0 ? "up" : "down"; }
+function fmtPct(n) { return (n > 0 ? "+" : "") + n.toFixed(1) + "%"; }
+function arrow(t) { return t === "up" ? "↑" : t === "down" ? "↓" : "→"; }
+
+// ================================================================
+// SOCIAL SHARING
+// ================================================================
+const PAGE_URL = encodeURIComponent(SITE_URL);
+const PAGE_TEXT = encodeURIComponent("Grocery prices this week 🥚 — check what eggs, milk, butter and more are doing now at What Did Eggs Do Now?");
+document.getElementById("shareX").href = `https://twitter.com/intent/tweet?text=${PAGE_TEXT}&url=${PAGE_URL}`;
+document.getElementById("shareFB").href = `https://www.facebook.com/sharer/sharer.php?u=${PAGE_URL}`;
+
+function copyLink(btn) {
+  navigator.clipboard.writeText(SITE_URL).then(() => {
+    btn.textContent = "✓ Copied!";
+    btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = "🔗 Copy link"; btn.classList.remove("copied"); }, 2000);
+  });
+}
+
+function toggleCompare(btn) {
+  const section = btn.nextElementSibling;
+  section.classList.toggle("open");
+  btn.textContent = section.classList.contains("open") ? "✕ Close" : "📍 What did you pay?";
+}
+
+function runCompare(btn, national) {
+  const input = btn.previousElementSibling;
+  const result = btn.closest(".compare-section").querySelector(".compare-result");
+  const val = parseFloat(input.value);
+  if (isNaN(val) || val <= 0) { result.textContent = "Enter a valid price."; result.className = "compare-result"; return; }
+  const diff = val - national;
+  const diffPct = (diff / national * 100).toFixed(1);
+  if (Math.abs(diff) < 0.01) {
+    result.textContent = `Exactly the national average. Spooky.`;
+    result.className = "compare-result";
+  } else if (diff > 0) {
+    result.textContent = `Your store is $${diff.toFixed(2)} more (+${diffPct}%) than the national average. ${diff > 1 ? "Yikes." : "Not terrible, but noted."}`;
+    result.className = "compare-result worse";
+  } else {
+    result.textContent = `Your store is $${Math.abs(diff).toFixed(2)} less (${diffPct}%) than the national average. ${Math.abs(diff) > 1 ? "Lucky. Don't tell anyone." : "A small but real win."}`;
+    result.className = "compare-result better";
+  }
+}
+
+// ================================================================
+// PRICE CHART
+// ================================================================
+const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const now = new Date();
+const months = Array.from({length: 6}, (_, i) => {
+  const d = new Date(now.getFullYear(), now.getMonth() - 5 + i, 1);
+  return monthNames[d.getMonth()];
+});
+let chartInstance = null;
+function buildChart(item) {
+  if (chartInstance) chartInstance.destroy();
+  const ctx = document.getElementById("priceChart").getContext("2d");
+  const t = trend(item.current, item.previous);
+  const color = t === "up" ? "#E53935" : t === "down" ? "#2E7D32" : "#F4C430";
+  chartInstance = new Chart(ctx, {
+    type: "line",
+    data: { labels: months, datasets: [{ data: item.history, borderColor: color, backgroundColor: color + "18", borderWidth: 2.5, pointBackgroundColor: color, pointRadius: 5, pointHoverRadius: 7, fill: true, tension: 0.3 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` $${c.parsed.y.toFixed(2)}` } } },
+      scales: {
+        x: { grid: { color: "#f0f0f0" }, ticks: { font: { family: "'Inter', sans-serif", size: 12 }, color: "#999" } },
+        y: { grid: { color: "#f0f0f0" }, ticks: { font: { family: "'Inter', sans-serif", size: 12 }, color: "#999", callback: v => "$" + v.toFixed(2) } }
+      }
+    }
+  });
+}
+
+// ================================================================
+// RENDER ALL — rebuilds entire page from a data set
+// ================================================================
+function renderAll(items, week) {
+  document.getElementById("lastUpdated").textContent = week;
+
+  // Static price summary for SEO — readable without JavaScript execution
+  const summary = items.map(i => `${i.emoji} ${i.name} $${i.current.toFixed(2)}/${i.unit}`).join(" · ");
+  document.getElementById("pricesSummary").textContent = `Week of ${week}: ${summary}. National averages from FRED, BLS, and EIA.`;
+
+  // Mood meter
+  const upCount = items.filter(i => trend(i.current, i.previous) === "up").length;
+  const moodLevel = Math.round((upCount / items.length) * 5);
+  const moods = ["Suspiciously Chill","Mildly Concerning","Getting Dicey","Send Help","Absolute Chaos","We Are So Back (Just Kidding)"];
+  const meterEl = document.getElementById("moodMeter");
+  meterEl.innerHTML = "";
+  for (let i = 1; i <= 5; i++) {
+    const pip = document.createElement("div");
+    pip.className = "mood-pip" + (i <= moodLevel ? " active" : "");
+    meterEl.appendChild(pip);
+  }
+  document.getElementById("moodText").textContent = moods[moodLevel] || moods[0];
+  // ── Villain ──
+  let villainId = null;
+  const upItems = items.filter(i => trend(i.current, i.previous) === "up");
+  if (upItems.length > 0) {
+    const villain = upItems.reduce((a, b) => pct(a.current, a.previous) > pct(b.current, b.previous) ? a : b);
+    villainId = villain.id;
+    document.getElementById("villainBadge").textContent = `😈 This Week's Villain: ${villain.emoji} ${villain.name}`;
+  }
+
+  // ── Budget pick ──
+  let budgetId = null;
+  const downItems = items.filter(i => trend(i.current, i.previous) === "down");
+  if (downItems.length > 0) {
+    const budgetPick = downItems.reduce((a, b) => pct(a.current, a.previous) < pct(b.current, b.previous) ? a : b);
+    budgetId = budgetPick.id;
+  }
+
+  // ── Market basket ──
+  const basketCurrent  = items.reduce((s, i) => s + i.current, 0);
+  const basketPrevious = items.reduce((s, i) => s + i.previous, 0);
+  const basketChange   = pct(basketCurrent, basketPrevious);
+  const basketDir      = trend(basketCurrent, basketPrevious);
+  const basketEl = document.getElementById("basketCard");
+  basketEl.style.display = "";
+  document.getElementById("basketTotal").textContent = `$${basketCurrent.toFixed(2)}`;
+  document.getElementById("basketSub").textContent = `vs. $${basketPrevious.toFixed(2)} last week`;
+  const bChange = document.getElementById("basketChange");
+  bChange.textContent = `${arrow(basketDir)} ${fmtPct(basketChange)}`;
+  bChange.className = `basket-change ${basketDir}`;
+  document.getElementById("basketNote").textContent = basketDir === "up"
+    ? `That's $${(basketCurrent - basketPrevious).toFixed(2)} more than last week. The audacity.`
+    : basketDir === "down"
+    ? `That's $${(basketPrevious - basketCurrent).toFixed(2)} less than last week. A rare win.`
+    : "Holding steady this week. Every single item. Suspicious.";
+
+  // ── Spotlight (biggest mover) ──
+  const allMoved = items.map(i => ({ ...i, absPct: Math.abs(pct(i.current, i.previous)) }));
+  const spotlight = allMoved.reduce((a, b) => a.absPct > b.absPct ? a : b);
+  const spotDir = trend(spotlight.current, spotlight.previous);
+  const spotYoy = pct(spotlight.current, spotlight.yearAgo);
+  const spotEl = document.getElementById("spotlight");
+  spotEl.style.display = "";
+  spotEl.className = `spotlight is-${spotDir}`;
+  const spotVerb = spotDir === "up" ? "surged" : spotDir === "down" ? "dropped" : "held flat";
+  const spotYoyStr = spotYoy > 0 ? `+${spotYoy.toFixed(1)}%` : `${spotYoy.toFixed(1)}%`;
+  spotEl.innerHTML = `
+    <div class="spotlight-icon">${spotlight.emoji}</div>
+    <div class="spotlight-body">
+      <div class="spotlight-eyebrow">This Week's Biggest Mover</div>
+      <div class="spotlight-headline">${spotlight.name} ${spotVerb} ${fmtPct(pct(spotlight.current, spotlight.previous))}</div>
+      <div class="spotlight-detail">
+        Now at <strong>$${spotlight.current.toFixed(2)}</strong> vs. $${spotlight.previous.toFixed(2)} last period —
+        and <strong>${spotYoyStr} compared to this time last year</strong>.
+        ${spotDir === "up" ? "The numbers are not playing." : spotDir === "down" ? "A bright spot in an otherwise grim receipt." : "Stability. Unnerving but appreciated."}
+      </div>
+    </div>
+  `;
+
+  // ── Price cards ──
+  const grid = document.getElementById("priceGrid");
+  grid.innerHTML = "";
+  items.forEach(item => {
+    const t = trend(item.current, item.previous);
+    const change = pct(item.current, item.previous);
+    const yoy = pct(item.current, item.yearAgo);
+    const isVillain = item.id === villainId;
+    const isBudget  = item.id === budgetId;
+    const isHigh    = item.current >= Math.max(...item.history);
+    const shareText = encodeURIComponent(`${item.emoji} ${item.name} is $${item.current.toFixed(2)} this week (${fmtPct(change)} from last week). Via What Did Eggs Do Now?`);
+    const xUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${PAGE_URL}`;
+    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${PAGE_URL}`;
+
+    const badgeHTML = (isHigh || isBudget) ? `
+      <div class="badge-row">
+        ${isHigh   ? '<span class="card-badge high">🚨 6-Month High</span>' : ''}
+        ${isBudget ? '<span class="card-badge budget">💚 Budget Pick</span>' : ''}
+      </div>` : '';
+
+    const flamesHTML = isVillain ? `
+      <span class="villain-flame f-bl">🔥</span>
+      <span class="villain-flame f-bcl">🔥</span>
+      <span class="villain-flame f-bc">🔥</span>
+      <span class="villain-flame f-bcr">🔥</span>
+      <span class="villain-flame f-br">🔥</span>
+      <span class="villain-flame f-l">🔥</span>
+      <span class="villain-flame f-r">🔥</span>` : '';
+
+    const card = document.createElement("div");
+    card.className = `price-card trend-${t}${isVillain ? " is-villain" : ""}`;
+    card.innerHTML = `
+      ${flamesHTML}
+      <div class="card-top">
+        <div class="card-item">
+          <span class="card-emoji">${item.emoji}</span>
+          <div>
+            <div class="card-name">${item.name}</div>
+            <div class="card-unit">${item.unit}</div>
+          </div>
+        </div>
+        <div class="change-badge ${t}">${arrow(t)} ${fmtPct(change)}</div>
+      </div>
+      ${badgeHTML}
+      <div class="price-row">
+        <span class="current-price">$${item.current.toFixed(2)}</span>
+        <span class="prev-price">$${item.previous.toFixed(2)}</span>
+      </div>
+      <div class="year-ago">vs. a year ago: <strong>$${item.yearAgo.toFixed(2)}</strong> (${fmtPct(yoy)} YoY)</div>
+      <div class="snark">${item.snark}</div>
+      <div class="card-share">
+        <a href="${xUrl}" target="_blank" rel="noopener" class="card-share-btn">𝕏 Share this</a>
+        <a href="${fbUrl}" target="_blank" rel="noopener" class="card-share-btn">f Share</a>
+      </div>
+      <button class="compare-toggle" onclick="toggleCompare(this)">📍 What did you pay?</button>
+      <div class="compare-section">
+        <div class="compare-row">
+          <input class="compare-input" type="number" step="0.01" min="0" placeholder="e.g. $${item.current.toFixed(2)}" />
+          <button class="compare-btn" onclick="runCompare(this, ${item.current})">Compare</button>
+        </div>
+        <div class="compare-result"></div>
+      </div>
+      ${isVillain ? '<div class="villain-peek">😈</div><div class="villain-crown">👑</div>' : ''}
+    `;
+    grid.appendChild(card);
+
+    if (isVillain) {
+      // Scroll-triggered reveal (mobile)
+      if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('is-revealed'); obs.unobserve(e.target); }
+          });
+        }, { threshold: 0.5 });
+        obs.observe(card);
+      }
+      // Flame parallax on scroll
+      const flameSpeeds = [0.06, 0.04, 0.09, 0.05, 0.07, 0.03, 0.05];
+      const onFlameScroll = () => {
+        const rect = card.getBoundingClientRect();
+        const viewH = window.innerHeight;
+        if (rect.bottom < -100 || rect.top > viewH + 100) return;
+        const progress = 1 - (rect.top + rect.height / 2) / viewH; // -1 to 1
+        card.querySelectorAll('.villain-flame').forEach((f, i) => {
+          const py = progress * flameSpeeds[i] * 60;
+          f.style.setProperty('--py', `${py.toFixed(1)}px`);
+        });
+      };
+      window.addEventListener('scroll', onFlameScroll, { passive: true });
+      onFlameScroll();
+    }
+  });
+
+  // Chart tabs
+  const tabsEl = document.getElementById("chartTabs");
+  tabsEl.innerHTML = "";
+  items.forEach((item, idx) => {
+    const tab = document.createElement("button");
+    tab.className = "chart-tab" + (idx === 0 ? " active" : "");
+    tab.textContent = item.emoji + " " + item.name.split(" ")[0];
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".chart-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      buildChart(item);
+    });
+    tabsEl.appendChild(tab);
+  });
+  buildChart(items[0]);
+}
+
+// ================================================================
+// INIT
+// ================================================================
+function init() {
+  renderAll(FALLBACK_ITEMS, FALLBACK_WEEK);
+}
+init();
+</script>
+</body>
+</html>
