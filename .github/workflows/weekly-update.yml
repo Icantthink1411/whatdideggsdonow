@@ -41,4 +41,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: d18a196a04a2a90d145324f90a37b094
-          command: pages deploy . --project-name=whatdideggsdonow
+          command: deploy
