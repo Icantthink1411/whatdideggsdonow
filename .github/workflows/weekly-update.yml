@@ -36,9 +36,3 @@ jobs:
           git diff --staged --quiet || git commit -m "Weekly price update - $(date +'%B %d, %Y')"
           git push
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: d18a196a04a2a90d145324f90a37b094
-          command: deploy
