@@ -969,8 +969,9 @@ function renderAll(items, week) {
     const isBudget  = item.id === budgetId;
     const isHigh    = item.current >= Math.max(...item.history);
     const shareText = encodeURIComponent(`${item.emoji} ${item.name} is $${item.current.toFixed(2)} this week (${fmtPct(change)} from last week). Via What Did Eggs Do Now?`);
-    const xUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${PAGE_URL}`;
-    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${PAGE_URL}`;
+    const itemUrl = encodeURIComponent(`${SITE_URL}/share/${item.id}.html`);
+    const xUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${itemUrl}`;
+    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${itemUrl}`;
 
     const badgeHTML = (isHigh || isBudget) ? `
       <div class="badge-row">
