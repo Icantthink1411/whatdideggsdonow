@@ -141,7 +141,7 @@ def make_html(item):
     # Version the image URL so social sites re-fetch it when prices change
     ver      = f"{item['current']}-{item['previous']}".replace(".", "")
     img_url  = f"{SITE_URL}/share/og-{item['id']}.png?v={ver}"
-    page_url = f"{SITE_URL}/share/{item['id']}.html"
+    page_url = f"{SITE_URL}/share/{item['id']}"
     favicon  = "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥚</text></svg>"
 
     html = f"""<!DOCTYPE html>
